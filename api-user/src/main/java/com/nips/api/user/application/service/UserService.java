@@ -34,8 +34,9 @@ public class UserService {
                 return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
             }
             String jwt = creatingJwt(authRequestDto);
-            return new ResponseEntity<>(new AuthCredentialsResponseDto(jwt), HttpStatus.OK);
-
+            AuthCredentialsResponseDto responseDto = new AuthCredentialsResponseDto();
+            responseDto.setToken(jwt);
+            return new ResponseEntity<>(responseDto, HttpStatus.OK);
         } catch (BadCredentialsException e) {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
