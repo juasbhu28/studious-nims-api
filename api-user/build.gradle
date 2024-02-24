@@ -55,7 +55,7 @@ jacoco {
 }
 
 def excludesClasses = [
-		'com/dictionary/DictionaryApplication.class',
+		'com/dictionary/Application.class',
 		'**/model/**/*.class',
 		'**/repository/**/*.class',
 		'**/crud/**/*.class',

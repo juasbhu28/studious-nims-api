@@ -24,6 +24,9 @@ Este proyecto es un servicio RESTFul desarrollado en Java Spring Boot, que permi
 
 ### Endpoint Potsman
 
+/login
+
+/dev/user-api/v1/public/auth/login
 todo: agregar enpoint
 
 ### Swagger

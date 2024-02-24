@@ -2,15 +2,12 @@ package com.nips.api.user.infraestructure.persistence.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
-import jdk.jfr.Timestamp;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
-import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Getter
@@ -34,16 +31,14 @@ public class UserEntity {
     @Column(nullable = false)
     private Boolean isActive;
 
-    @Column(nullable = false, columnDefinition = "DATETIME")
-    @Timestamp
+    @CreationTimestamp
+    @Column(nullable = false, columnDefinition = "TIMESTAMP")
     private LocalDateTime createdAt;
 
-    @Column(nullable = false, columnDefinition = "DATETIME")
-    @Timestamp
+    @Column(nullable = false, columnDefinition = "TIMESTAMP")
     private LocalDateTime modifiedAt;
 
-    @Column(nullable = false, columnDefinition = "DATETIME")
-    @Timestamp
+    @Column(nullable = false, columnDefinition = "TIMESTAMP")
     private LocalDateTime lastLogin;
 
     @OneToMany(cascade = CascadeType.ALL)

@@ -24,6 +24,7 @@ import java.io.IOException;
 import static com.nips.api.user.common.RouteMapping.PUBLIC_API;
 
 @Slf4j
+@Component
 public class JwtFilter extends OncePerRequestFilter {
 
     @Autowired
@@ -32,14 +33,19 @@ public class JwtFilter extends OncePerRequestFilter {
     @Autowired
     private UserSecurityService userSecurityService;
 
-
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
         try {
 
             String jwtHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
-            if (jwtHeader == null || !jwtHeader.startsWith("Bearer ")) {
+            String requestURI = request.getRequestURI();
+            if (StringUtils.isEmpty(jwtHeader) || requestURI.contains(PUBLIC_API)){
+                filterChain.doFilter(request, response);
+                return;
+            }
+
+            if( !jwtHeader.startsWith("Bearer ")) {
                 throw new JWTVerificationException("Invalid Authorization header");
             }
 

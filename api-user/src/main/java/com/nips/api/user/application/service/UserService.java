@@ -19,8 +19,8 @@ import static ch.qos.logback.core.util.OptionHelper.isNullOrEmpty;
 @Service
 public class UserService {
 
-    private AuthenticationManager authenticationManager;
-    private UserSecurityService userSecurityService;
+    private final AuthenticationManager authenticationManager;
+    private final UserSecurityService userSecurityService;
 
     @Autowired
     private JwtUtils jwtUtils;
