@@ -47,7 +47,6 @@ public class SecurityConfig {
         return http.build();
     }
 
-    @Bean
     public JwtFilter jwtFilter() {
        return new JwtFilter();
    }

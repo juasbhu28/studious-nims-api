@@ -6,6 +6,7 @@ import com.nips.api.user.application.dto.RoleDto;
 import com.nips.api.user.application.dto.UserDto;
 import com.nips.api.user.application.mapper.UserDtoMapper;
 import com.nips.api.user.domain.repository.IUserRepository;
+import com.nips.api.user.infraestructure.UserRepositoryImpl;
 import com.nips.api.user.infraestructure.config.security.jwt.JwtUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,17 +25,15 @@ import static ch.qos.logback.core.util.OptionHelper.isNullOrEmpty;
 @Service
 public class UserSecurityService implements UserDetailsService {
 
-    @Autowired
-    private IUserRepository userRepository;
-
-    @Autowired
-    private JwtUtils jwtUtils;
-
-    @Autowired
-    private AuthenticationManager authenticationManager;
+    private final IUserRepository userRepository;
 
     @Autowired
     private UserDtoMapper userDtoMapper;
+
+    @Autowired
+    public UserSecurityService(UserRepositoryImpl userRepository) {
+        this.userRepository = userRepository;
+    }
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
@@ -52,26 +51,5 @@ public class UserSecurityService implements UserDetailsService {
                 .build();
     }
 
-    public ResponseEntity<AuthCredentialsResponseDto> login(AuthCredentialsRequestDto authRequestDto) {
-        try {
-            if (isNullOrEmpty(authRequestDto.getEmail())  || isNullOrEmpty(authRequestDto.getPassword())) {
-                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-            }
-            String jwt = creatingJwt(authRequestDto);
-            return new ResponseEntity<>(new AuthCredentialsResponseDto(jwt), HttpStatus.OK);
-
-        } catch (BadCredentialsException e) {
-            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-        }
-    }
-
-    private String creatingJwt(AuthCredentialsRequestDto authRequestDto) {
-        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
-                authRequestDto.getEmail().trim(), authRequestDto.getPassword().trim()));
-
-        UserDetails userDetails = loadUserByUsername(authRequestDto.getEmail());
-
-        return jwtUtils.createToken(userDetails);
-    }
 
 }

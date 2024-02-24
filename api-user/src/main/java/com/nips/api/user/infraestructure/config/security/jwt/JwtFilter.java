@@ -1,6 +1,7 @@
 package com.nips.api.user.infraestructure.config.security.jwt;
 
 
+import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.nips.api.user.application.service.UserSecurityService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -9,6 +10,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
@@ -22,14 +24,10 @@ import java.io.IOException;
 import static com.nips.api.user.common.RouteMapping.PUBLIC_API;
 
 @Slf4j
-@Component
 public class JwtFilter extends OncePerRequestFilter {
-
-    private static final String X_AUTH_USER = "X-AUTH-USER";
 
     @Autowired
     private JwtUtils jwtUtils;
-
 
     @Autowired
     private UserSecurityService userSecurityService;
@@ -40,13 +38,10 @@ public class JwtFilter extends OncePerRequestFilter {
                                     FilterChain filterChain) throws ServletException, IOException {
         try {
 
-            String jwtHeader = request.getHeader(X_AUTH_USER);
-            String requestURI = request.getRequestURI();
-            if (StringUtils.isEmpty(jwtHeader) || requestURI.contains(PUBLIC_API)){
-                filterChain.doFilter(request, response);
-                return;
+            String jwtHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
+            if (jwtHeader == null || !jwtHeader.startsWith("Bearer ")) {
+                throw new JWTVerificationException("Invalid Authorization header");
             }
-
 
             this.jwtUtils.verifyToken(jwtHeader);
 

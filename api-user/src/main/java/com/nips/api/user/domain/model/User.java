@@ -1,11 +1,9 @@
 package com.nips.api.user.domain.model;
 
-import com.nips.api.user.infraestructure.persistence.entity.PhoneEntity;
-import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
@@ -16,9 +14,10 @@ public class User {
     private String name;
     private String email;
     private String password;
-    private String created;
-    private String modified;
-    private String lastLogin;
+    private Boolean isActive;
+    private LocalDateTime createdAt;
+    private LocalDateTime modifiedAt;
+    private LocalDateTime lastLogin;
     private List<Phone> phones;
     private List<Role> roles;
 

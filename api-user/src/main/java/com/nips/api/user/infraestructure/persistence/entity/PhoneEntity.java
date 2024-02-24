@@ -1,10 +1,9 @@
 package com.nips.api.user.infraestructure.persistence.entity;
 
+import com.nips.api.user.domain.model.User;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.data.annotation.Id;
-import org.springframework.security.core.userdetails.User;
 
 @Entity
 @Getter
@@ -20,14 +19,14 @@ public class PhoneEntity {
     private String number;
 
     @Column(nullable = false, length = 10)
-    private String citycode;
+    private String cityCode;
 
     @Column(nullable = false, length = 10)
-    private String countrycode;
+    private String countryCode;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    private UserEntity user;
 
 
 }

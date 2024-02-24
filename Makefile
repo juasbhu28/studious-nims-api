@@ -28,3 +28,6 @@ test_api:
 	@echo "Building API..."
 	cd api-user && ./gradlew clean build test
 
+run_db:
+	docker-compose up -d postgres-db
+

@@ -3,6 +3,7 @@ package com.nips.api.user.application.dto;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
@@ -12,11 +13,10 @@ public class UserDto {
     private String name;
     private String email;
     private String password;
-    private String token;
-    private String created;
-    private String modified;
-    private String lastLogin;
-    private boolean isActive;
+    private Boolean isActive;
+    private LocalDateTime createdAt;
+    private LocalDateTime modifiedAt;
+    private LocalDateTime lastLogin;
     private List<RoleDto> roles;
     private List<PhoneDto> phones;
 

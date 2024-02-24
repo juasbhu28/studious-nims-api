@@ -5,7 +5,7 @@ import com.nips.api.user.infraestructure.persistence.entity.UserEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = {PhoneMapper.class, RoleMapper.class})
 public interface UserMapper {
 
     @Mapping( target = "id", source = "id")
@@ -13,7 +13,7 @@ public interface UserMapper {
     @Mapping( target = "email", source = "email")
     @Mapping( target = "password", source = "password")
     @Mapping( target = "phones", source = "phones")
-    @Mapping( target = "Roles", source = "roles")
+    @Mapping( target = "roles", source = "roles")
     User toModel(UserEntity userEntity);
 
 }
