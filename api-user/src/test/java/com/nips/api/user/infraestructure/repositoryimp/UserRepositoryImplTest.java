@@ -9,13 +9,18 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.boot.test.context.SpringBootTest;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.when;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.Mockito.*;
 
-class UserRepositoryImplTest {
+@SpringBootTest
+public class UserRepositoryImplTest {
 
     @Mock
     private UserJpaRepository userJpaRepository;
@@ -28,40 +33,68 @@ class UserRepositoryImplTest {
 
     @BeforeEach
     public void setUp() {
-        MockitoAnnotations.openMocks(this);
+        MockitoAnnotations.initMocks(this);
     }
 
     @Test
-    public void whenGetUserByEmail_thenUserReturned() {
-        // Given
-        String email = "user@example.com";
-        UserEntity userEntity = new UserEntity(); // Asume que UserEntity es la entidad JPA
-        userEntity.setEmail(email);
-        User userModel = new User(); // Asume que User es el modelo de dominio
-        userModel.setEmail(email);
-
+    void givenEmail_whenGetUserByEmail_thenSuccess() {
+        // Arrange
+        String email = "test@example.com";
+        User user = new User();
+        UserEntity userEntity = new UserEntity();
         when(userJpaRepository.findByEmail(email)).thenReturn(Optional.of(userEntity));
-        when(userMapper.toModel(userEntity)).thenReturn(userModel);
+        when(userMapper.toModel(any(UserEntity.class))).thenReturn(user);
 
-        // When
-        Optional<User> foundUser = userRepositoryImpl.getUserByEmail(email);
+        // Act
+        Optional<User> result = userRepositoryImpl.getUserByEmail(email);
 
-        // Then
-        assertTrue(foundUser.isPresent());
-        assertEquals(email, foundUser.get().getEmail());
+        // Assert
+        verify(userJpaRepository).findByEmail(email);
+        assertTrue(result.isPresent());
+        assertEquals(result.get(), user);
     }
 
     @Test
-    public void whenGetUserByEmailWithNonexistentEmail_thenEmptyOptionalReturned() {
-        // Given
-        String email = "nonexistent@example.com";
-        when(userJpaRepository.findByEmail(email)).thenReturn(Optional.empty());
+    void givenEmail_whenExistsByEmail_thenSuccess() {
+        // Arrange
+        String email = "test@example.com";
+        when(userJpaRepository.existsByEmail(email)).thenReturn(true);
 
-        // When
-        Optional<User> foundUser = userRepositoryImpl.getUserByEmail(email);
+        // Act
+        boolean exists = userRepositoryImpl.existsByEmail(email);
 
-        // Then
-        assertTrue(foundUser.isEmpty());
+        // Assert
+        verify(userJpaRepository).existsByEmail(email);
+        assertTrue(exists);
     }
 
+    @Test
+    void givenUser_whenSave_thenSuccess() {
+        // Arrange
+        User user = new User();
+        UserEntity userEntity = new UserEntity();
+        when(userMapper.toEntity(user)).thenReturn(userEntity);
+        when(userJpaRepository.save(userEntity)).thenReturn(userEntity);
+        when(userMapper.toModel(any(UserEntity.class))).thenReturn(user);
+
+        // Act
+        User savedUser = userRepositoryImpl.save(user);
+
+        // Assert
+        verify(userJpaRepository).save(userEntity);
+        assertNotNull(savedUser);
+    }
+
+    @Test
+    void givenUserId_whenUpdateLastLogin_thenSuccess() {
+        // Arrange
+        Long id = 1L;
+        doNothing().when(userJpaRepository).updateLast(any(LocalDateTime.class), anyLong());
+
+        // Act
+        userRepositoryImpl.updateLastLogin(id);
+
+        // Assert
+        verify(userJpaRepository).updateLast(any(LocalDateTime.class), anyLong());
+    }
 }

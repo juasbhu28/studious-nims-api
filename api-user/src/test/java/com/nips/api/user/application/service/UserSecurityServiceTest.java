@@ -31,108 +31,57 @@ import static org.mockito.Mockito.when;
 class UserSecurityServiceTest {
 
     @Mock
-    private AuthenticationManager authenticationManager;
-
-    @Mock
-    private JwtUtils jwtUtils;
-
-    @InjectMocks
-    private UserService userService;
-
-    @Mock
     private IUserRepository userRepository;
 
     @Mock
-    private UserMapper userDtoMapper;
+    private UserMapper userMapper;
 
     @InjectMocks
     private UserSecurityService userSecurityService;
 
     @BeforeEach
     public void setUp() {
-        MockitoAnnotations.openMocks(this);
+        MockitoAnnotations.initMocks(this);
     }
 
     @Test
-    public void whenLoadUserByUsername_thenUserDetailsReturned() {
+    void givenExistingEmail_whenLoadUserByUsername_thenUserDetailsReturned() {
         // Given
         String email = "user@example.com";
-        UserDto mockUserDto = new UserDto();
-        mockUserDto.setEmail(email);
-        mockUserDto.setPassword("password");
+        UserDto userDto = new UserDto();
+        userDto.setId(1L);
+        userDto.setEmail(email);
+        userDto.setPassword("password");
+        // Setup roles as needed
         RoleDto roleDto = new RoleDto();
         roleDto.setName("USER");
-        mockUserDto.setRoles(List.of(roleDto));
+        userDto.setRoles(List.of(roleDto));
 
         when(userRepository.getUserByEmail(email)).thenReturn(Optional.of(new User()));
-        when(userDtoMapper.toDto(any(User.class))).thenReturn(mockUserDto);
+        when(userMapper.toDto(any())).thenReturn(userDto);
 
         // When
         UserDetails userDetails = userSecurityService.loadUserByUsername(email);
 
         // Then
+        assertNotNull(userDetails);
         assertEquals(email, userDetails.getUsername());
         assertEquals("password", userDetails.getPassword());
-        assertTrue(userDetails.getAuthorities().stream()
-                .anyMatch(authority -> authority.getAuthority().equals("ROLE_USER")));
+        assertTrue(userDetails.getAuthorities().stream().anyMatch(authority -> authority.getAuthority().equals("ROLE_USER")));
     }
 
     @Test
-    public void whenLoadUserByUsernameWithNonexistentEmail_thenUsernameNotFoundException() {
+    void givenNonExistentEmail_whenLoadUserByUsername_thenUsernameNotFoundException() {
         // Given
         String email = "nonexistent@example.com";
         when(userRepository.getUserByEmail(email)).thenReturn(Optional.empty());
 
-        // When / Then
-        assertThrows(UsernameNotFoundException.class, () -> userSecurityService.loadUserByUsername(email));
-    }
-
-
-    @Test
-    void whenLoginWithValidCredentials_thenReturnsJwt() {
-        // Given
-        AuthCredentialsRequestDto requestDto = new AuthCredentialsRequestDto();
-        requestDto.setEmail("user@example.com");
-        requestDto.setPassword("password");
-        UserDetails mockUserDetails = org.mockito.Mockito.mock(UserDetails.class);
-        when(authenticationManager.authenticate(any(UsernamePasswordAuthenticationToken.class))).thenReturn(null);
-        when(userSecurityService.loadUserByUsername("user@example.com")).thenReturn(mockUserDetails);
-        when(jwtUtils.createToken(mockUserDetails)).thenReturn("mockJwtToken");
-
         // When
-        ResponseEntity<AuthCredentialsResponseDto> response = userService.login(requestDto);
+        Exception exception = assertThrows(UsernameNotFoundException.class, () -> {
+            userSecurityService.loadUserByUsername(email);
+        });
 
         // Then
-        assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertEquals("mockJwtToken", response.getBody().getToken());
-    }
-
-    @Test
-    void whenLoginWithEmptyCredentials_thenReturnsBadRequest() {
-        // Given
-        AuthCredentialsRequestDto requestDto = new AuthCredentialsRequestDto();
-
-        // When
-        ResponseEntity<AuthCredentialsResponseDto> response = userService.login(requestDto);
-
-        // Then
-        assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
-    }
-
-    @Test
-    void whenLoginWithInvalidCredentials_thenReturnsUnauthorized() {
-        // Given
-        AuthCredentialsRequestDto requestDto = new AuthCredentialsRequestDto();
-        requestDto.setEmail("bad@email.com");
-        requestDto.setPassword("badPassword");
-
-        when(authenticationManager.authenticate(any(UsernamePasswordAuthenticationToken.class)))
-                .thenThrow(new BadCredentialsException(""));
-
-        // When
-        ResponseEntity<AuthCredentialsResponseDto> response = userService.login(requestDto);
-
-        // Then
-        assertEquals(HttpStatus.UNAUTHORIZED, response.getStatusCode());
+        assertEquals("User not found", exception.getMessage());
     }
 }

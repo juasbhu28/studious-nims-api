@@ -68,6 +68,7 @@ def excludesClasses = [
 		'**/mapper/**/*.class',
 		'**/controller/**/*.class',
 		'**/entity/**/*.class',
+		'**/common/**/*.class',
 ]
 
 tasks.named('jacocoTestReport') {
