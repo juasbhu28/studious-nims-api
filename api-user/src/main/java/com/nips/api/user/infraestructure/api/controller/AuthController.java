@@ -4,6 +4,7 @@ package com.nips.api.user.infraestructure.api.controller;
 import com.nips.api.user.application.dto.AuthCredentialsRequestDto;
 import com.nips.api.user.application.dto.AuthCredentialsResponseDto;
 import com.nips.api.user.application.dto.AuthRegisterResponseDto;
+import com.nips.api.user.application.service.UserSecurityService;
 import com.nips.api.user.application.service.UserService;
 import com.nips.api.user.common.RouteMapping;
 import com.nips.api.user.application.dto.AuthRegisterRequestDto;

@@ -1,4 +1,4 @@
-package com.nips.api.user.infraestructure.repositoryImp;
+package com.nips.api.user.infraestructure.repositoryimp;
 
 import com.nips.api.user.domain.mapper.UserMapper;
 import com.nips.api.user.domain.model.User;

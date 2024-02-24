@@ -17,7 +17,7 @@ public final class RouteMapping {
 
     //USER
 
-    public static final String USER_API_ROOT = PRIVATE_API + "/user";
-    public static final String GET_USER = "/";
+    public static final String AUTH_TEST_API_ROOT = PRIVATE_API + "/test";
+
 
 }

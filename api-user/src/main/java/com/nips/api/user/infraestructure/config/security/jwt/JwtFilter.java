@@ -50,7 +50,7 @@ public class JwtFilter extends OncePerRequestFilter {
 
             this.jwtUtils.verifyToken(jwtHeader);
 
-            String username = this.jwtUtils.getUserToken(jwtHeader);
+            String username = this.jwtUtils.getUsername(jwtHeader);
             UserDetails user = userSecurityService.loadUserByUsername(username);
 
             UsernamePasswordAuthenticationToken auth =

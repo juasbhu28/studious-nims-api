@@ -12,14 +12,13 @@ import java.util.List;
 @Setter
 public class AuthRegisterRequestDto {
 
-    @Pattern(regexp = "^[a-zA-Z]*$", message = "El nombre debe ser alfabético")
+    @Pattern(regexp = "^[a-zA-Z\\s]*$", message = "El nombre debe ser alfabético")
     private String name;
 
     @Email(message = "El correo electrónico debe tener un formato válido")
     private String email;
 
     @Pattern(regexp = "^[a-zA-Z0-9]*$", message = "La contraseña debe ser alfanumérica")
-    @Pattern(regexp = "^(?=.*[a-z])", message = "La contraseña debe tener al menos una letra minúscula")
     private String password;
 
     List<PhoneDto> phones;

@@ -11,4 +11,6 @@ public interface IUserRepository {
     boolean existsByEmail(String email);
 
     User save(User entity);
+
+    void updateLastLogin(Long id);
 }
