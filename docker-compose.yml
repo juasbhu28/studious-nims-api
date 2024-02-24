@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  java-api:
+    environment:
+        - SPRING_PROFILES_ACTIVE=dev
+        - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-db:5432/nimuserDB
+        - SPRING_DATASOURCE_USERNAME=nimuser
+        - SPRING_DATASOURCE_PASSWORD=password
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+      args:
+        CACHEBUST: ${CACHEBUST}
+    ports:
+      - "8080:8080"
+      
+
+  postgres-db:
+    build:
+      context: .
+      dockerfile: Dockerfile.db
+    ports:
+      - "5432:5432"
+

@@ -1,0 +1,24 @@
+# Dockerfile.api
+
+# Etapa de construcción
+FROM amazoncorretto:21 as builder
+
+# Validando cache para recompilar
+ARG CACHEBUST=1 
+
+WORKDIR /app/api-user
+
+COPY /api-user .
+
+RUN ./gradlew build --info
+
+# Etapa de despliegue
+FROM amazoncorretto:21
+
+WORKDIR /opt
+
+COPY --from=builder /app/api-user/build/libs/api-user-0.0.1-SNAPSHOT.jar app.jar
+
+EXPOSE 8080
+
+CMD ["java", "-jar", "app.jar"]
