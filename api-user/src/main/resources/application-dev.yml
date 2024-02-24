@@ -26,9 +26,6 @@ security:
     order: 10
 
 
-springdoc:
-  swagger-ui:
-    path: /swagger-ui.html
 
 app:
   jwt:
