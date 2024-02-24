@@ -13,6 +13,11 @@ public interface RoleMapper {
 
     @Mapping(target = "id", source = "id")
     @Mapping(target = "name", source = "name")
-    Role toModel(RoleEntity roleDto);
-    List<Role> toModelList(List<RoleEntity> roleDtos);
+    RoleDto toDto(Role role);
+    List<RoleDto> toDtoList(List<Role> roles);
+
+    @Mapping(target = "id", source = "id")
+    @Mapping(target = "name", source = "name")
+    RoleEntity toEntity(Role role);
+    Role toModel(RoleEntity roleEntity);
 }

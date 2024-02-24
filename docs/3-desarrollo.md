@@ -32,7 +32,7 @@ Formato de Rama y de  Pull Request #[número-tarea]-[nombre] (ejemplo: #1-crear-
 | #01-workflow_files_configs | Crear archivos de configuración | Archivos de configuración creados |
 | #02-Auth_component | Crear componente de autenticación | Componente de autenticación creado |
 | #03-Swagger | Implementar Swagger | Swagger implementado |
-| #03-User_component | Crear componente de usuario | Componente de usuario creado |
+| #04-User_component | Crear componente de usuario | Componente de usuario creado |
 
 ### Cobertura
 

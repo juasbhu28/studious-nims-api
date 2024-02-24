@@ -1,0 +1,130 @@
+{
+	"info": {
+		"_postman_id": "114f833e-6cbe-4684-9146-5a2fa9e8fe83",
+		"name": "Nipsum",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "14589672"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"micorre@correo.com\",\n    \"password\": \"password\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/dev/user-api/v1/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"dev",
+								"user-api",
+								"v1",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"iKyFpQGspaFXiSsEFeQHkRuCpbdrPMnGMtnKIlrHbNHXDkupefKWxgYiTfWkXNIIZZmSaNsNNOiTMwVVD\",\n  \"email\": \"string\",\n  \"password\": \"string\",\n  \"phones\": [\n    {\n      \"number\": \"36188522888136716925308745189891067475074674926229170397203239667945679417361119892079\",\n      \"cityCode\": \"1449765886069350222447801940451123605743771529805\",\n      \"countryCode\": \"7993166027397663320628568864869503583627558351707187125455454647689555019377894737271946293\"\n    }\n  ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/dev/user-api/v1/public/auth/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"dev",
+								"user-api",
+								"v1",
+								"public",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "private",
+			"item": [
+				{
+					"name": "testjwt",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/dev/user-api/private/test",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"dev",
+								"user-api",
+								"private",
+								"test"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "swagger",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/dev/user-api/swagger-ui/index.html#/auth-controller/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"dev",
+						"user-api",
+						"swagger-ui",
+						"index.html"
+					],
+					"hash": "/auth-controller/login"
+				}
+			},
+			"response": []
+		}
+	]
+}

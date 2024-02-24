@@ -28,6 +28,10 @@ Este proyecto es un servicio RESTFul desarrollado en Java Spring Boot, que permi
 
 /dev/user-api/v1/public/auth/login
 
+/register
+
+/dev/user-api/v1/public/auth/register
+
 
 Swagger or OpenAPI
 

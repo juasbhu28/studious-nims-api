@@ -21,7 +21,7 @@ public class UserEntity {
     @Column(nullable = false, length = 50)
     private String name;
 
-    @Column(nullable = false, length = 50)
+    @Column(nullable = false, length = 50, unique = true)
     @Email
     private String email;
 
@@ -35,13 +35,15 @@ public class UserEntity {
     @Column(nullable = false, columnDefinition = "TIMESTAMP")
     private LocalDateTime createdAt;
 
+    @CreationTimestamp
     @Column(nullable = false, columnDefinition = "TIMESTAMP")
     private LocalDateTime modifiedAt;
 
+    @CreationTimestamp
     @Column(nullable = false, columnDefinition = "TIMESTAMP")
     private LocalDateTime lastLogin;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private List<PhoneEntity> phones;
 

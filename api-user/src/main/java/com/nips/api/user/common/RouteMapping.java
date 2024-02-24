@@ -13,10 +13,11 @@ public final class RouteMapping {
 
     public static final String AUTH_API_ROOT = PUBLIC_API + "/auth";
     public static final String LOGIN_API = "/login";
+    public static final String REGISTER_API = "/register";
 
     //USER
 
-    public static final String USER_API_ROOT = PRIVATE_API + "/user";
-    public static final String GET_USER = "/";
+    public static final String AUTH_TEST_API_ROOT = PRIVATE_API + "/test";
+
 
 }

@@ -1,6 +1,7 @@
 package com.nips.api.user.infraestructure.config;
 
 import com.nips.api.user.infraestructure.config.security.jwt.JwtFilter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -47,6 +48,7 @@ public class SecurityConfig {
         return http.build();
     }
 
+    @Bean
     public JwtFilter jwtFilter() {
        return new JwtFilter();
    }
