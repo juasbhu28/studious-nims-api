@@ -1,4 +1,4 @@
-# studious-nims-api - Interview
+# studious-nims-api# maximus-interview-ml
 
 ## Índice
 
@@ -23,18 +23,6 @@ Este proyecto es un servicio RESTFul desarrollado en Java Spring Boot, que permi
 
 
 ### Endpoint Potsman
-
-/login
-
-/dev/user-api/v1/public/auth/login
-
-
-Swagger or OpenAPI
-
-/dev/user-api/swagger-ui/index.html
-
-/dev/user-api/v3/api-docs
-
 
 todo: agregar enpoint
 

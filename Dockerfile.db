@@ -4,7 +4,7 @@ FROM postgres:16.1
 # Set environment variables for PostgreSQL
 ENV POSTGRES_USER=nimuser
 ENV POSTGRES_PASSWORD=password
-ENV POSTGRES_DB=nimapiDb
+ENV POSTGRES_DB=apiuserDB
 
 # Expose the default PostgreSQL port
 EXPOSE 5432
