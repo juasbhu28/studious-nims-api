@@ -25,15 +25,11 @@ import static ch.qos.logback.core.util.OptionHelper.isNullOrEmpty;
 @Service
 public class UserSecurityService implements UserDetailsService {
 
-    private final IUserRepository userRepository;
+    @Autowired
+    private IUserRepository userRepository;
 
     @Autowired
     private UserDtoMapper userDtoMapper;
-
-    @Autowired
-    public UserSecurityService(UserRepositoryImpl userRepository) {
-        this.userRepository = userRepository;
-    }
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {

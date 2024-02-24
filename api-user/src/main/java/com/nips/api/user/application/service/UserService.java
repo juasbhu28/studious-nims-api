@@ -19,16 +19,14 @@ import static ch.qos.logback.core.util.OptionHelper.isNullOrEmpty;
 @Service
 public class UserService {
 
-    private final AuthenticationManager authenticationManager;
-    private final UserSecurityService userSecurityService;
+    @Autowired
+    private AuthenticationManager authenticationManager;
+
+    @Autowired
+    private UserSecurityService userSecurityService;
 
     @Autowired
     private JwtUtils jwtUtils;
-
-    public UserService(AuthenticationManager authenticationManager, UserSecurityService userSecurityService) {
-        this.authenticationManager = authenticationManager;
-        this.userSecurityService = userSecurityService;
-    }
 
     public ResponseEntity<AuthCredentialsResponseDto> login(AuthCredentialsRequestDto authRequestDto) {
         try {
