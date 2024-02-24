@@ -22,4 +22,4 @@ jobs:
 
       - name: Run tests
         run: ./gradlew test
-        working-directory: api-user
+        working-directory: dictionary-api
