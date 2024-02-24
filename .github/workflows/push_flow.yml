@@ -1,0 +1,25 @@
+name: Push Checks
+run-name: Push Checks - ${{ github.event.pull_request.title }}
+
+on:
+  push:
+    branches:
+      - 'feature/*'
+      
+jobs:
+  build:
+    name: Test and Coverage Checks API Java 21 spring - Gradle
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v2
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+
+      - name: Run tests
+        run: ./gradlew test
+        working-directory: dictionary-api
