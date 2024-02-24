@@ -16,4 +16,12 @@ public interface UserMapper {
     @Mapping( target = "roles", source = "roles")
     User toModel(UserEntity userEntity);
 
+    @Mapping(target = "id", source = "id")
+    @Mapping(target = "name", source = "name")
+    @Mapping(target = "email", source = "email")
+    @Mapping(target = "password", source = "password")
+    @Mapping(target = "phones", source = "phones")
+    @Mapping(target = "roles", source = "roles")
+    UserEntity toEntity(User user);
+
 }

@@ -10,7 +10,6 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface PhoneDtoMapper {
 
-    @Mapping(target = "id", source = "id")
     @Mapping(target = "number", source = "number")
     @Mapping(target = "cityCode", source = "cityCode")
     @Mapping(target = "countryCode", source = "countryCode")

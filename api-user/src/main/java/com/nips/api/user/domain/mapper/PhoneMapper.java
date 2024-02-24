@@ -16,4 +16,10 @@ public interface PhoneMapper {
     @Mapping(target = "countryCode", source = "countryCode")
     Phone toModel(PhoneEntity phoneDto);
     List<Phone> toModelList(List<PhoneEntity> phoneDtos);
+
+    @Mapping(target = "number", source = "number")
+    @Mapping(target = "cityCode", source = "cityCode")
+    @Mapping(target = "countryCode", source = "countryCode")
+    @Mapping(target = "user", ignore = true)
+    PhoneEntity toEntity(Phone phone);
 }

@@ -22,4 +22,14 @@ public class UserRepositoryImpl implements IUserRepository {
     public Optional<User> getUserByEmail(String email) {
         return userJpaRepository.findByEmail(email).map(userMapper::toModel);
     }
+
+    @Override
+    public boolean existsByEmail(String email) {
+        return userJpaRepository.existsByEmail(email);
+    }
+
+    @Override
+    public User save(User entity) {
+        return userMapper.toModel(userJpaRepository.save(userMapper.toEntity(entity)));
+    }
 }

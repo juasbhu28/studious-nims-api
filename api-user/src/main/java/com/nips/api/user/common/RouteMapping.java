@@ -13,6 +13,7 @@ public final class RouteMapping {
 
     public static final String AUTH_API_ROOT = PUBLIC_API + "/auth";
     public static final String LOGIN_API = "/login";
+    public static final String REGISTER_API = "/register";
 
     //USER
 

@@ -7,4 +7,8 @@ import java.util.Optional;
 
 public interface IUserRepository {
     Optional<User> getUserByEmail(String email);
+
+    boolean existsByEmail(String email);
+
+    User save(User entity);
 }
