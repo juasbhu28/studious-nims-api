@@ -24,7 +24,6 @@ import java.io.IOException;
 import static com.nips.api.user.common.RouteMapping.PUBLIC_API;
 
 @Slf4j
-@Component
 public class JwtFilter extends OncePerRequestFilter {
 
     @Autowired
