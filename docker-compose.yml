@@ -2,6 +2,8 @@ version: '3.8'
 
 services:
   java-api:
+    depends_on:
+        - postgres-db
     environment:
         - SPRING_PROFILES_ACTIVE=dev
         - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-db:5432/nimuserDB
