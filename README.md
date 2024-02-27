@@ -9,7 +9,7 @@
 
 ## Resumen
 
-Este proyecto es un servicio RESTFul desarrollado en Java Spring Boot, que permite obtener estadísticas de un conjunto de posts en diferentes idiomas.
+Este proyecto es un servicio RESTFul desarrollado en Java Spring Boot, que permite autenticar y registrar usuarios.
 
 ## Instrucciones
 
