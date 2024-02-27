@@ -33,18 +33,12 @@ Este proyecto es un servicio RESTFul desarrollado en Java Spring Boot, que permi
 /dev/user-api/v1/public/auth/register
 
 
-Swagger or OpenAPI
+### Swagger
+
 
 /dev/user-api/swagger-ui/index.html
 
 /dev/user-api/v3/api-docs
-
-
-todo: agregar enpoint
-
-### Swagger
-
-todo: agregar swagger
 
 
 ---
