@@ -9,7 +9,7 @@
 
 ## Resumen
 
-Este proyecto es un servicio RESTFul desarrollado en Java Spring Boot, que permite obtener estadísticas de un conjunto de posts en diferentes idiomas.
+Este proyecto es un servicio RESTFul desarrollado en Java Spring Boot, que permite hacer authenticación y registro de usuarios. 
 
 ## Instrucciones
 
@@ -19,8 +19,7 @@ Este proyecto es un servicio RESTFul desarrollado en Java Spring Boot, que permi
 1. Clonar el proyecto
 2. Ejecutar el comando `make run_all` en la raíz del proyecto
 3. Ejecutar scripts de base de datos que estan dentro de la carpeta db/
-4. Consumir desde potsman
-
+4. Consumir desde potsman - File dentro de caperta /postman
 
 ### Endpoint Potsman
 
@@ -32,20 +31,13 @@ Este proyecto es un servicio RESTFul desarrollado en Java Spring Boot, que permi
 
 /dev/user-api/v1/public/auth/register
 
+### Swagger
 
 Swagger or OpenAPI
 
 /dev/user-api/swagger-ui/index.html
 
 /dev/user-api/v3/api-docs
-
-
-todo: agregar enpoint
-
-### Swagger
-
-todo: agregar swagger
-
 
 ---
 
