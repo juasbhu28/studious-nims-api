@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: user-api
+  servlet:
+    context-path: /user-api
+  profiles:
+    active: dev
+
+app:
+  swagger:
+    api:
+      tittle: JAVA API Restfull
+      description: API Restfull
+      termsOfServiceUrl: © 2024  juansebohu
+      version: 0.1.0
+    contact:
+      name: JuanS Botello H
+      url:  www.juansbotelloh.com
+      email: juasbhu@gmail.com
+    licence:
+      name: licence MIT
+      url: LicenceURL.com
